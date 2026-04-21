@@ -1,0 +1,286 @@
+{
+  "layers": [
+
+    {
+      "name": "conv1",
+      "type": "conv",
+      "input": "../data/input/input.bin",
+      "output": "../data/output/conv1_output.bin",
+      "weights": "../data/weights/conv1_weight.bin",
+      "bias": "../data/weights/conv1_bias.bin",
+      "kernel_size": 3,
+      "stride": 1,
+      "padding": 1,
+      "input_shape": [1, 3, 32, 32],
+      "output_shape": [1, 32, 32, 32]
+    },
+    {
+      "name": "bn1",
+      "type": "batchnorm",
+      "input": "../data/output/conv1_output.bin",
+      "output": "../data/output/bn1_output.bin",
+      "weight": "../data/weights/bn1_weight.bin",
+      "bias": "../data/weights/bn1_bias.bin",
+      "running_mean": "../data/weights/bn1_running_mean.bin",
+      "running_var": "../data/weights/bn1_running_var.bin",
+      "input_shape": [1, 32, 32, 32],
+      "output_shape": [1, 32, 32, 32]
+    },
+    {
+      "name": "relu1",
+      "type": "relu",
+      "input": "../data/output/bn1_output.bin",
+      "output": "../data/output/relu1_output.bin",
+      "input_shape": [1, 32, 32, 32],
+      "output_shape": [1, 32, 32, 32]
+    },
+
+    {
+      "name": "conv2",
+      "type": "conv",
+      "input": "../data/output/relu1_output.bin",
+      "output": "../data/output/conv2_output.bin",
+      "weights": "../data/weights/conv2_weight.bin",
+      "bias": "../data/weights/conv2_bias.bin",
+      "kernel_size": 3,
+      "stride": 1,
+      "padding": 1,
+      "input_shape": [1, 32, 32, 32],
+      "output_shape": [1, 64, 32, 32]
+    },
+    {
+      "name": "bn2",
+      "type": "batchnorm",
+      "input": "../data/output/conv2_output.bin",
+      "output": "../data/output/bn2_output.bin",
+      "weight": "../data/weights/bn2_weight.bin",
+      "bias": "../data/weights/bn2_bias.bin",
+      "running_mean": "../data/weights/bn2_running_mean.bin",
+      "running_var": "../data/weights/bn2_running_var.bin",
+      "input_shape": [1, 64, 32, 32],
+      "output_shape": [1, 64, 32, 32]
+    },
+    {
+      "name": "relu2",
+      "type": "relu",
+      "input": "../data/output/bn2_output.bin",
+      "output": "../data/output/relu2_output.bin",
+      "input_shape": [1, 64, 32, 32],
+      "output_shape": [1, 64, 32, 32]
+    },
+    {
+      "name": "maxpool1",
+      "type": "maxpool",
+      "input": "../data/output/relu2_output.bin",
+      "output": "../data/output/maxpool1_output.bin",
+      "kernel_size": 2,
+      "stride": 2,
+      "input_shape": [1, 64, 32, 32],
+      "output_shape": [1, 64, 16, 16]
+    },
+
+    {
+      "name": "conv3",
+      "type": "conv",
+      "input": "../data/output/maxpool1_output.bin",
+      "output": "../data/output/conv3_output.bin",
+      "weights": "../data/weights/conv3_weight.bin",
+      "bias": "../data/weights/conv3_bias.bin",
+      "kernel_size": 3,
+      "stride": 1,
+      "padding": 1,
+      "input_shape": [1, 64, 16, 16],
+      "output_shape": [1, 128, 16, 16]
+    },
+    {
+      "name": "bn3",
+      "type": "batchnorm",
+      "input": "../data/output/conv3_output.bin",
+      "output": "../data/output/bn3_output.bin",
+      "weight": "../data/weights/bn3_weight.bin",
+      "bias": "../data/weights/bn3_bias.bin",
+      "running_mean": "../data/weights/bn3_running_mean.bin",
+      "running_var": "../data/weights/bn3_running_var.bin",
+      "input_shape": [1, 128, 16, 16],
+      "output_shape": [1, 128, 16, 16]
+    },
+    {
+      "name": "relu3",
+      "type": "relu",
+      "input": "../data/output/bn3_output.bin",
+      "output": "../data/output/relu3_output.bin",
+      "input_shape": [1, 128, 16, 16],
+      "output_shape": [1, 128, 16, 16]
+    },
+    {
+      "name": "maxpool2",
+      "type": "maxpool",
+      "input": "../data/output/relu3_output.bin",
+      "output": "../data/output/maxpool2_output.bin",
+      "kernel_size": 2,
+      "stride": 2,
+      "input_shape": [1, 128, 16, 16],
+      "output_shape": [1, 128, 8, 8]
+    },
+
+    {
+      "name": "skip1_conv",
+      "type": "conv",
+      "input": "../data/output/relu1_output.bin",
+      "output": "../data/output/skip1_conv_output.bin",
+      "weights": "../data/weights/skip1_0_weight.bin",
+      "bias": "../data/weights/skip1_0_bias.bin",
+      "kernel_size": 1,
+      "stride": 4,
+      "padding": 0,
+      "input_shape": [1, 32, 32, 32],
+      "output_shape": [1, 128, 8, 8]
+    },
+    {
+      "name": "skip1_bn",
+      "type": "batchnorm",
+      "input": "../data/output/skip1_conv_output.bin",
+      "output": "../data/output/skip1_bn_output.bin",
+      "weight": "../data/weights/skip1_1_weight.bin",
+      "bias": "../data/weights/skip1_1_bias.bin",
+      "running_mean": "../data/weights/skip1_1_running_mean.bin",
+      "running_var": "../data/weights/skip1_1_running_var.bin",
+      "input_shape": [1, 128, 8, 8],
+      "output_shape": [1, 128, 8, 8]
+    },
+    {
+      "name": "skip1_add",
+      "type": "add",
+      "input1": "../data/output/maxpool2_output.bin",
+      "input2": "../data/output/skip1_bn_output.bin",
+      "output": "../data/output/block3_output.bin",
+      "input_shape": [1, 128, 8, 8],
+      "output_shape": [1, 128, 8, 8]
+    },
+    {
+      "name": "relu_block3",
+      "type": "relu",
+      "input": "../data/output/block3_output.bin",
+      "output": "../data/output/block3_relu_output.bin",
+      "input_shape": [1, 128, 8, 8],
+      "output_shape": [1, 128, 8, 8]
+    },
+
+    {
+      "name": "conv4",
+      "type": "conv",
+      "input": "../data/output/block3_relu_output.bin",
+      "output": "../data/output/conv4_output.bin",
+      "weights": "../data/weights/conv4_weight.bin",
+      "bias": "../data/weights/conv4_bias.bin",
+      "kernel_size": 3,
+      "stride": 1,
+      "padding": 1,
+      "input_shape": [1, 128, 8, 8],
+      "output_shape": [1, 256, 8, 8]
+    },
+    {
+      "name": "bn4",
+      "type": "batchnorm",
+      "input": "../data/output/conv4_output.bin",
+      "output": "../data/output/bn4_output.bin",
+      "weight": "../data/weights/bn4_weight.bin",
+      "bias": "../data/weights/bn4_bias.bin",
+      "running_mean": "../data/weights/bn4_running_mean.bin",
+      "running_var": "../data/weights/bn4_running_var.bin",
+      "input_shape": [1, 256, 8, 8],
+      "output_shape": [1, 256, 8, 8]
+    },
+    {
+      "name": "relu4",
+      "type": "relu",
+      "input": "../data/output/bn4_output.bin",
+      "output": "../data/output/relu4_output.bin",
+      "input_shape": [1, 256, 8, 8],
+      "output_shape": [1, 256, 8, 8]
+    },
+    {
+      "name": "maxpool3",
+      "type": "maxpool",
+      "input": "../data/output/relu4_output.bin",
+      "output": "../data/output/maxpool3_output.bin",
+      "kernel_size": 2,
+      "stride": 2,
+      "input_shape": [1, 256, 8, 8],
+      "output_shape": [1, 256, 4, 4]
+    },
+
+    {
+      "name": "skip2_conv",
+      "type": "conv",
+      "input": "../data/output/block3_relu_output.bin",
+      "output": "../data/output/skip2_conv_output.bin",
+      "weights": "../data/weights/skip2_0_weight.bin",
+      "bias": "../data/weights/skip2_0_bias.bin",
+      "kernel_size": 1,
+      "stride": 2,
+      "padding": 0,
+      "input_shape": [1, 128, 8, 8],
+      "output_shape": [1, 256, 4, 4]
+    },
+    {
+      "name": "skip2_bn",
+      "type": "batchnorm",
+      "input": "../data/output/skip2_conv_output.bin",
+      "output": "../data/output/skip2_bn_output.bin",
+      "weight": "../data/weights/skip2_1_weight.bin",
+      "bias": "../data/weights/skip2_1_bias.bin",
+      "running_mean": "../data/weights/skip2_1_running_mean.bin",
+      "running_var": "../data/weights/skip2_1_running_var.bin",
+      "input_shape": [1, 256, 4, 4],
+      "output_shape": [1, 256, 4, 4]
+    },
+    {
+      "name": "skip2_add",
+      "type": "add",
+      "input1": "../data/output/maxpool3_output.bin",
+      "input2": "../data/output/skip2_bn_output.bin",
+      "output": "../data/output/block4_output.bin",
+      "input_shape": [1, 256, 4, 4],
+      "output_shape": [1, 256, 4, 4]
+    },
+    {
+      "name": "relu_block4",
+      "type": "relu",
+      "input": "../data/output/block4_output.bin",
+      "output": "../data/output/block4_relu_output.bin",
+      "input_shape": [1, 256, 4, 4],
+      "output_shape": [1, 256, 4, 4]
+    },
+
+    {
+      "name": "fc1",
+      "type": "fc",
+      "input": "../data/output/block4_relu_output.bin",
+      "output": "../data/output/fc1_output.bin",
+      "weights": "../data/weights/fc1_weight.bin",
+      "bias": "../data/weights/fc1_bias.bin",
+      "input_shape": [1, 4096],
+      "output_shape": [1, 256]
+    },
+    {
+      "name": "relu_fc1",
+      "type": "relu",
+      "input": "../data/output/fc1_output.bin",
+      "output": "../data/output/relu_fc1_output.bin",
+      "input_shape": [1, 256],
+      "output_shape": [1, 256]
+    },
+    {
+      "name": "fc2",
+      "type": "fc",
+      "input": "../data/output/relu_fc1_output.bin",
+      "output": "../data/output/final_output.bin",
+      "weights": "../data/weights/fc2_weight.bin",
+      "bias": "../data/weights/fc2_bias.bin",
+      "input_shape": [1, 256],
+      "output_shape": [1, 10]
+    }
+
+  ]
+}

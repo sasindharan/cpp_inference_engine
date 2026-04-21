@@ -1,0 +1,10 @@
+{
+  "layers": [
+    {
+      "name": "softmax",
+      "type": "softmax",
+      "input": "../data/input/softmax_input.bin",
+      "output": "../data/output/softmax_output.bin"
+    }
+  ]
+}
